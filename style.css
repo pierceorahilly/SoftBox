@@ -232,7 +232,16 @@ a     { text-decoration: none; }
   background-size: 48px 48px;
 }
 
-.hero__inner { position: relative; z-index: 1; }
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.hero__left { display: flex; flex-direction: column; }
 
 .hero__pill {
   display: inline-flex;
@@ -591,6 +600,119 @@ a     { text-decoration: none; }
 .footer__bar p { font-size: 13px; color: rgba(255,255,255,.25); text-align: center; }
 
 /* ============================================================
+   HERO SOFTBOX VISUAL
+   ============================================================ */
+.hero__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sb-scene {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  animation: sbFloat 4s ease-in-out infinite;
+}
+
+@keyframes sbFloat {
+  0%,100% { transform: translateY(0px) rotate(-2deg); }
+  50%      { transform: translateY(-28px) rotate(2deg); }
+}
+
+/* Back glow box */
+.sb-box--back {
+  position: absolute;
+  inset: 0;
+  border-radius: 32px;
+  background: var(--accent);
+  opacity: .25;
+  filter: blur(24px);
+  transform: translate(16px, 16px) scale(1.05);
+  animation: sbPulse 4s ease-in-out infinite;
+}
+
+@keyframes sbPulse {
+  0%,100% { opacity: .25; transform: translate(16px,16px) scale(1.05); }
+  50%      { opacity: .45; transform: translate(20px,20px) scale(1.12); }
+}
+
+/* Main box */
+.sb-box--main {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 32px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 24px 64px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.2);
+  overflow: hidden;
+  padding: 28px;
+}
+
+/* Top shine face */
+.sb-face--top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,.12), transparent);
+  border-radius: 32px 32px 0 0;
+  pointer-events: none;
+}
+
+/* Right shine face */
+.sb-face--right {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 40%;
+  background: linear-gradient(270deg, rgba(167,139,250,.15), transparent);
+  pointer-events: none;
+}
+
+/* Inner content lines */
+.sb-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.sb-row {
+  height: 12px;
+  border-radius: 100px;
+  background: rgba(255,255,255,.25);
+}
+.sb-row--wide  { width: 100%; animation: sbBar 4s ease-in-out infinite; }
+.sb-row--mid   { width: 70%; animation: sbBar 4s ease-in-out infinite .3s; }
+.sb-row--short { width: 45%; animation: sbBar 4s ease-in-out infinite .6s; }
+
+@keyframes sbBar {
+  0%,100% { opacity: .25; }
+  50%      { opacity: .7; }
+}
+
+/* Shadow on the dark bg */
+.sb-shadow {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 20px;
+  background: rgba(0,0,0,.4);
+  border-radius: 50%;
+  filter: blur(12px);
+  animation: sbShadow 4s ease-in-out infinite;
+}
+
+@keyframes sbShadow {
+  0%,100% { transform: translateX(-50%) scaleX(1);   opacity: .5; }
+  50%      { transform: translateX(-50%) scaleX(.7);  opacity: .25; }
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 900px) {
@@ -601,6 +723,8 @@ a     { text-decoration: none; }
 }
 
 @media (max-width: 768px) {
+  .hero__inner  { grid-template-columns: 1fr; }
+  .hero__visual { display: none; }
   .section { padding: 72px 0; }
 
   .nav__links  { display: none; position: absolute; top: 68px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--border); flex-direction: column; gap: 0; padding: 8px 0; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
