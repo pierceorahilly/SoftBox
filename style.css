@@ -671,6 +671,13 @@ a     { text-decoration: none; }
   transform: skewY(-8deg);
 }
 
+/* Words row */
+.pixar__words {
+  display: flex;
+  align-items: baseline;
+  line-height: 1;
+}
+
 /* "Soft" text */
 .pixar__soft {
   font-size: 88px;
@@ -695,7 +702,6 @@ a     { text-decoration: none; }
   letter-spacing: -2px;
   opacity: 0;
   animation: wordFadeIn .9s ease-out .7s forwards;
-  margin-top: -8px;
 }
 
 @keyframes wordFadeIn {
