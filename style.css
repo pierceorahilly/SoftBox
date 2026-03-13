@@ -135,8 +135,8 @@ a     { text-decoration: none; }
   gap: 32px;
 }
 @keyframes logoIn {
-  from { opacity: 0; transform: translateX(-16px); }
-  to   { opacity: 1; transform: translateX(0); }
+  0%   { opacity: 0; transform: translateY(20px) scale(0.8); letter-spacing: .3em; }
+  100% { opacity: 1; transform: translateY(0) scale(1);    letter-spacing: normal; }
 }
 
 .nav__logo {
@@ -147,7 +147,7 @@ a     { text-decoration: none; }
   font-weight: 700;
   color: var(--dark);
   flex-shrink: 0;
-  animation: logoIn .6s cubic-bezier(.22,.68,0,1.2) both;
+  animation: logoIn 1.2s cubic-bezier(.16,1,.3,1) both;
 }
 .nav__links {
   display: flex;
