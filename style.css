@@ -382,9 +382,40 @@ a     { text-decoration: none; }
 .svc-card p  { color: var(--muted); font-size: 15px; line-height: 1.65; }
 
 /* ============================================================
+   ODOO APPS
+   ============================================================ */
+.apps { background: var(--white); }
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.app-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px 20px;
+  transition: box-shadow .2s, transform .2s, border-color .2s;
+}
+.app-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
+  border-color: var(--brand-light);
+}
+.app-card__icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+.app-card h3 { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+.app-card p  { color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+/* ============================================================
    WHY SOFTBOX
    ============================================================ */
-.why { background: var(--white); }
+.why { background: var(--bg); }
 
 .why__inner {
   display: grid;
