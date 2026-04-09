@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Softbox – LinkedIn Banner</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #222; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: 'Inter', Arial, sans-serif; }
+
+    .hint {
+      color: #888;
+      font-size: 13px;
+      margin-bottom: 16px;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ── Banner canvas: exactly 1584×396 ── */
+    .banner {
+      width: 1584px;
+      height: 396px;
+      position: relative;
+      overflow: hidden;
+      background: #0d0c18;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+
+    /* Grid overlay */
+    .banner__grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .35;
+    }
+    .blob--purple {
+      width: 700px; height: 700px;
+      background: #6B4FE0;
+      top: -300px; right: 100px;
+    }
+    .blob--teal {
+      width: 500px; height: 500px;
+      background: #00C4A7;
+      bottom: -250px; left: 60px;
+    }
+    .blob--purple2 {
+      width: 400px; height: 400px;
+      background: #6B4FE0;
+      bottom: -200px; right: 500px;
+      opacity: .18;
+    }
+
+    /* Content — shifted right to stay clear of the LinkedIn profile pic (bottom-left) */
+    .banner__inner {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Push content into the safe right zone */
+      padding: 0 100px 0 420px;
+      gap: 80px;
+    }
+
+    /* Center column: logo + headline */
+    .banner__left {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      flex: 1;
+    }
+
+    /* Logo mark */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo-mark {
+      width: 52px;
+      height: 52px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .logo-mark__sq {
+      position: absolute;
+      border-radius: 8px;
+    }
+    .logo-mark__sq--a {
+      width: 36px; height: 36px;
+      background: #6B4FE0;
+      top: 0; left: 0;
+    }
+    .logo-mark__sq--b {
+      width: 24px; height: 24px;
+      background: #00C4A7;
+      bottom: 0; right: 0;
+    }
+    .logo-word {
+      font-size: 38px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .logo-word span { color: #6B4FE0; }
+
+    /* Headline */
+    .headline {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .headline__main {
+      font-size: 48px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+    }
+    .headline__grad {
+      background: linear-gradient(135deg, #a78bfa, #00C4A7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .headline__sub {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(255,255,255,.5);
+      margin-top: 4px;
+    }
+
+    /* Right: pill + CTA */
+    .banner__right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 24px;
+      flex-shrink: 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.85);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .pill-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #00C4A7;
+      flex-shrink: 0;
+    }
+
+    .cta-box {
+      text-align: right;
+    }
+    .cta-url {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.3px;
+    }
+    .cta-label {
+      font-size: 12px;
+      color: rgba(255,255,255,.4);
+      margin-top: 4px;
+    }
+
+    /* Vertical divider */
+    .divider {
+      width: 1px;
+      height: 140px;
+      background: linear-gradient(180deg, transparent, rgba(255,255,255,.15), transparent);
+      flex-shrink: 0;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <p class="hint">Screenshot the banner below at full size (1584 × 396px) and upload to LinkedIn.</p>
+
+  <div class="banner">
+    <div class="banner__grid"></div>
+    <div class="blob blob--purple"></div>
+    <div class="blob blob--teal"></div>
+    <div class="blob blob--purple2"></div>
+
+    <div class="banner__inner">
+
+      <!-- Left -->
+      <div class="banner__left">
+        <div class="logo">
+          <div class="logo-mark">
+            <div class="logo-mark__sq logo-mark__sq--a"></div>
+            <div class="logo-mark__sq logo-mark__sq--b"></div>
+          </div>
+          <div class="logo-word">Soft<span>box</span></div>
+        </div>
+        <div class="headline">
+          <div class="headline__main">
+            Run your entire business.<br />
+            <span class="headline__grad">One platform.</span>
+          </div>
+          <div class="headline__sub">Odoo consulting &amp; implementation for growing companies.</div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider"></div>
+
+      <!-- Right -->
+      <div class="banner__right">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          Odoo Consulting &amp; Implementation
+        </div>
+        <div class="cta-box">
+          <div class="cta-url">softbox.ie</div>
+          <div class="cta-label">Book a free demo today</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
